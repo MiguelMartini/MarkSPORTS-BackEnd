@@ -5,6 +5,7 @@ API Rest do sistema MarkSports.
 ## Tecnologias
 
 - Laravel
+- Composer
 - MySQL
 - PestV
 
@@ -19,13 +20,14 @@ git clone <https://github.com/MiguelMartini/MarkSPORTS-BackEnd.git>
 ### 2. Acesse a pasta do projeto
 
 ```bash
-cd marksports
+cd marksportsbackend
 ```
 
 ### 3. Instale as dependências
+_Tenha instalado o composer para seguir_
 
 ```bash
-compser install
+composer install
 cp .env.example .env
 php artisan key:generate
 ```
