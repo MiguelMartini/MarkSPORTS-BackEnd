@@ -12,7 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sells', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+
+            $table->double('discount')->nullable();
+
+            $table->string('payment_method')
+                ->default('Pix');
+
+            $table->decimal('shipping', 10, 2);
+
+            $table->double('total')->nullable();
+
+            $table->foreignId('user_id')
+                ->constrained('users');
+
+            $table->foreignId('cart_id')
+                ->constrained('carts');
+
             $table->timestamps();
         });
     }
