@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -18,10 +21,14 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
+     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'password',
+        'phone',
+        'address_id',
+        'cart_id'
     ];
 
     /**
@@ -39,6 +46,26 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function rates(): HasMany
+    {
+        return $this->hasMany(Rate::class);
+    }
+
+    public function sells(): HasMany
+    {
+        return $this->hasMany(Sell::class);
+    }
     protected function casts(): array
     {
         return [
