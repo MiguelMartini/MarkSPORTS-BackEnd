@@ -19,13 +19,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone');
-
-            $table->foreignId('address_id')
-                ->constrained('addresses');
-
-            $table->foreignId('cart_id')
-                ->constrained('carts');
-
             $table->timestamps();
         });
     }
