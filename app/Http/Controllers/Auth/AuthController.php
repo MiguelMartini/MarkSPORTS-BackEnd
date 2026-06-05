@@ -50,13 +50,40 @@ class AuthController extends Controller
     )]
     public function register(Request $request)
     {
+        $messages = [
+            // Mensagens para o campo Name
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.string' => 'O nome deve ser um texto válido.',
+            'name.max' => 'O nome não pode ter mais de 20 caracteres.',
+
+            // Mensagens para o campo Last Name
+            'last_name.required' => 'O sobrenome é obrigatório.',
+            'last_name.string' => 'O sobrenome deve ser um texto válido.',
+            'last_name.max' => 'O sobrenome não pode ter mais de 255 caracteres.',
+
+            // Mensagens para o campo Email
+            'email.required' => 'O campo e-mail é obrigatório.',
+            'email.email' => 'Por favor, insira um endereço de e-mail válido.',
+            'email.unique' => 'Este e-mail já está sendo utilizado por outra conta.',
+
+            // Mensagens para o campo Password (incluindo o mínimo)
+            'password.required' => 'A senha é obrigatória.',
+            'password.string' => 'A senha deve ser um texto válido.',
+            'password.min' => 'A senha deve conter no mínimo 8 caracteres.',
+            'password.confirmed' => 'A confirmação da senha não coincide.',
+
+            // Mensagens para o campo Phone
+            'phone.required' => 'O número de telefone é obrigatório.',
+            'phone.string' => 'O telefone deve ser um texto válido.',
+            'phone.max' => 'O telefone não pode ter mais de 20 caracteres.',
+        ];
         $validated = $request->validate([
             'name' => 'required|string|max:20',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'required|string|max:20',
-        ]);
+        ], $messages);
 
         $user = DB::transaction(function () use ($validated) {
 
