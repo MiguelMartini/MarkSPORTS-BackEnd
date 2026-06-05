@@ -8,23 +8,25 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model
 {
-     protected $fillable = [];
+     protected $fillable = [
+        'user_id'
+     ];
 
-    public function users(): HasMany
+        public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function sells(): HasMany
+    public function sells()
     {
         return $this->hasMany(Sell::class);
     }
 
-    public function products(): BelongsToMany
+    public function products()
     {
         return $this->belongsToMany(
             Product::class,
             'cart_product'
-        );
+        )->withPivot('quantity');
     }
 }
