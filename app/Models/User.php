@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Address;
+use App\Models\Cart;
+use App\Models\Sell;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -27,8 +30,6 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'address_id',
-        'cart_id'
     ];
 
     /**
@@ -47,14 +48,19 @@ class User extends Authenticatable
      * @return array<string, string>
      */
 
-    public function address(): BelongsTo
+        public function cart()
     {
-        return $this->belongsTo(Address::class);
+        return $this->hasOne(Cart::class);
     }
 
-    public function cart(): BelongsTo
+    public function sells()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->hasMany(Sell::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 
     public function rates(): HasMany
@@ -62,10 +68,6 @@ class User extends Authenticatable
         return $this->hasMany(Rate::class);
     }
 
-    public function sells(): HasMany
-    {
-        return $this->hasMany(Sell::class);
-    }
     protected function casts(): array
     {
         return [
