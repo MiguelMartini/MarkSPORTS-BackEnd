@@ -12,6 +12,222 @@
         }
     ],
     "paths": {
+        "/api/addresses": {
+            "get": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Listar endereços do usuário autenticado",
+                "description": "Retorna todos os endereços pertencentes ao usuário autenticado.",
+                "operationId": "33ccea30443418dbab9242aa67931614",
+                "responses": {
+                    "200": {
+                        "description": "Lista de endereços retornada com sucesso"
+                    },
+                    "401": {
+                        "description": "Usuário não autenticado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Cadastrar endereço",
+                "description": "Cria um novo endereço para o usuário autenticado.",
+                "operationId": "5549e34fec9817a9794302a767fc7fde",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "address",
+                                    "city",
+                                    "state",
+                                    "cep",
+                                    "number"
+                                ],
+                                "properties": {
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Rua das Flores"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Lages"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "example": "SC"
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "88501-000"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Endereço criado com sucesso"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/addresses/{id}": {
+            "get": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Busca endereço o endereço específico",
+                "description": "Retorna um endereço específico do usuário autenticado.",
+                "operationId": "de6419a46a2f3639437add4f3cb76e5d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do endereço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Endereço encontrado"
+                    },
+                    "404": {
+                        "description": "Endereço não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Atualizar endereço",
+                "description": "Atualiza um endereço pertencente ao usuário autenticado.",
+                "operationId": "2f078db19c8d7e5a374faa4b048e4c45",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do endereço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Rua Central"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Florianópolis"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "example": "SC"
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "88000-000"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Endereço atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Endereço não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Endereços"
+                ],
+                "summary": "Excluir endereço",
+                "description": "Remove um endereço pertencente ao usuário autenticado.",
+                "operationId": "3380f49103f9fb0f4a126d324894a33a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do endereço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Endereço removido com sucesso"
+                    },
+                    "404": {
+                        "description": "Endereço não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/register": {
             "post": {
                 "tags": [
@@ -217,6 +433,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Endereços",
+            "description": "Endereços"
+        },
         {
             "name": "Autenticação",
             "description": "Autenticação"
