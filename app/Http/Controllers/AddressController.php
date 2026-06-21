@@ -138,7 +138,7 @@ class AddressController extends Controller
     }
 
     #[OA\Put(
-        path: "/api/addresses/{id}",
+        path: "/api/addresses/update/{id}",
         summary: "Atualizar endereço",
         description: "Atualiza um endereço pertencente ao usuário autenticado.",
         tags: ["Endereços"],
@@ -201,7 +201,7 @@ class AddressController extends Controller
     }
 
     #[OA\Delete(
-        path: "/api/addresses/{id}",
+        path: "/api/addresses/delete/{id}",
         summary: "Excluir endereço",
         description: "Remove um endereço pertencente ao usuário autenticado.",
         tags: ["Endereços"],
