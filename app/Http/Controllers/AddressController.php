@@ -137,7 +137,7 @@ class AddressController extends Controller
         ], 201);
     }
 
-    #[OA\Put(
+    #[OA\Patch(
         path: "/api/addresses/update/{id}",
         summary: "Atualizar endereço",
         description: "Atualiza um endereço pertencente ao usuário autenticado.",
