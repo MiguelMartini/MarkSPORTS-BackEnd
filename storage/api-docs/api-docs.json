@@ -422,6 +422,211 @@
                     }
                 ]
             }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Listar todos os produtos",
+                "description": "Retorna todos os produtos",
+                "operationId": "1bfaa78d1c2c3848ab8165c5dadcad3e",
+                "responses": {
+                    "200": {
+                        "description": "Lista de Produtos retornada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Cadastrar produto",
+                "description": "Cadastra um novo produto.",
+                "operationId": "e8185e307706e2cd84bbcf5171e2f09d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "price",
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Camiseta"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Camiseta esportiva"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 49.9
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "Azul"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 100
+                                    },
+                                    "img": {
+                                        "type": "string",
+                                        "example": "https://site.com/imagem.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produto cadastrado com sucesso"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/product/{id}": {
+            "get": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Buscar produto por ID",
+                "description": "Retorna os dados de um produto específico.",
+                "operationId": "2768d88590e39a7ded1d0032e64dded7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do produto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto encontrado"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/product/update/{id}": {
+            "patch": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Atualizar produto",
+                "description": "Atualiza parcialmente um produto.",
+                "operationId": "340ee2574d78fb7afa951b1248048ebb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do produto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Camiseta Premium"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Nova descrição"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 59.9
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "Preto"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 80
+                                    },
+                                    "img": {
+                                        "type": "string",
+                                        "example": "https://site.com/imagem.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produto atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/product/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Deletar produto",
+                "description": "Deleta um produto pertencente ao usuário autenticado.",
+                "operationId": "32c34e272e90eb06a336fab74ca52e62",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Produto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto removido com sucesso"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -444,6 +649,10 @@
         {
             "name": "Autenticação",
             "description": "Autenticação"
+        },
+        {
+            "name": "Produtos",
+            "description": "Produtos"
         }
     ]
 }
