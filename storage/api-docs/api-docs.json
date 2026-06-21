@@ -127,14 +127,16 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/api/addresses/update/{id}": {
             "put": {
                 "tags": [
                     "Endereços"
                 ],
                 "summary": "Atualizar endereço",
                 "description": "Atualiza um endereço pertencente ao usuário autenticado.",
-                "operationId": "2f078db19c8d7e5a374faa4b048e4c45",
+                "operationId": "935dc7ed678b70230a1178576a7e83c9",
                 "parameters": [
                     {
                         "name": "id",
@@ -194,14 +196,16 @@
                         "bearerAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/api/addresses/delete/{id}": {
             "delete": {
                 "tags": [
                     "Endereços"
                 ],
                 "summary": "Excluir endereço",
                 "description": "Remove um endereço pertencente ao usuário autenticado.",
-                "operationId": "3380f49103f9fb0f4a126d324894a33a",
+                "operationId": "6aa04a5a776ce63972de6537e5377398",
                 "parameters": [
                     {
                         "name": "id",
