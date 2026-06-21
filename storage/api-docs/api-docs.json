@@ -130,13 +130,13 @@
             }
         },
         "/api/addresses/update/{id}": {
-            "put": {
+            "patch": {
                 "tags": [
                     "Endereços"
                 ],
                 "summary": "Atualizar endereço",
                 "description": "Atualiza um endereço pertencente ao usuário autenticado.",
-                "operationId": "935dc7ed678b70230a1178576a7e83c9",
+                "operationId": "20561b720023a5f1b01e4a0f6c272a42",
                 "parameters": [
                     {
                         "name": "id",
