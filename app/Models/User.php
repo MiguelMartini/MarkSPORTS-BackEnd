@@ -11,8 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Address;
+use App\Models\Product;
 use App\Models\Cart;
-use App\Models\Sell;
 
 class User extends Authenticatable
 {
@@ -24,7 +24,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-     protected $fillable = [
+    protected $fillable = [
         'name',
         'last_name',
         'email',
@@ -48,16 +48,15 @@ class User extends Authenticatable
      * @return array<string, string>
      */
 
-        public function cart()
+    public function cart()
     {
         return $this->hasOne(Cart::class);
     }
 
-    public function sells()
+    public function orders()
     {
-        return $this->hasMany(Sell::class);
+        return $this->hasMany(Order::class);
     }
-
     public function addresses()
     {
         return $this->hasMany(Address::class);
@@ -66,6 +65,11 @@ class User extends Authenticatable
     public function rates(): HasMany
     {
         return $this->hasMany(Rate::class);
+    }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
     }
 
     protected function casts(): array
