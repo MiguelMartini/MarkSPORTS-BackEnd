@@ -108,6 +108,8 @@ class ProductController extends Controller
                 'img.string' => 'A imagem deve ser uma string.'
             ]
         );
+        $validated['user_id'] = auth()->id();
+        
         $product = Product::create($validated);
 
         return response()->json([

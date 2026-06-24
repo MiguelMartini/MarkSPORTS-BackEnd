@@ -3,23 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\User;
+use App\Models\Order;
 
 class Cart extends Model
 {
-     protected $fillable = [
+    protected $fillable = [
         'user_id'
-     ];
+    ];
 
-        public function user()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-    public function sells()
+    public function orders()
     {
-        return $this->hasMany(Sell::class);
+        return $this->hasMany(Order::class);
     }
 
     public function products()
